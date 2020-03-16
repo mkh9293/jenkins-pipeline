@@ -1,0 +1,16 @@
+node {
+    stage('Source') {
+        git changelog: false, credentialsId: 'mkh9293', poll: false, url: 'https://github.com/mkh9293/jenkins-pipeline.git'
+    }
+    stage('Build') {
+        sh 'echo gradle build will go here'
+    }
+    stage('Input') {
+        def answer = input message: '<message>', parameters: [booleanParam(defaultValue: true, description:'Prerelease setting', name: 'prerelease')]
+        def answer = input message: '<message>', parameters: [choice(choices:"choice1\nchoice2\nchoice3\nchoice4\n", description:'Choose an option', name: 'Options')]
+        def lines = input message: '<message>',
+        parameters: [text(defaultValue:'''line1
+        line2
+        line3''', description: '', name:'Input Lines')]
+    }
+}
